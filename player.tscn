@@ -386,6 +386,7 @@ scale = Vector2(0.65, 0.65)
 icon = ExtResource("4_gjl1k")
 
 [node name="Quest" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
