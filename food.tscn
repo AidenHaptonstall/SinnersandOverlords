@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ngayfvfmggtg"]
+
+[ext_resource type="ArrayMesh" uid="uid://d2y8t773qnf08" path="res://SinnersandOverlords/3DObjects/uploads_files_3998079_burger.obj" id="1_w6faa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qf6rs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7j80e"]
+
+[node name="Food" type="Node3D"]
+
+[node name="UploadsFiles3998079Burger" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.063, 0, 0, 0, 0.063, 0, 0, 0, 0.063, 0, -0.062, 0)
+mesh = ExtResource("1_w6faa")
+
+[node name="Food" type="StaticBody3D" parent="UploadsFiles3998079Burger"]
+transform = Transform3D(1.21, 0, 0, 0, 1.21, 0, 0, 0, 1.21, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_qf6rs")
+
+[node name="Burger" type="CollisionShape3D" parent="UploadsFiles3998079Burger/Food"]
+transform = Transform3D(1.98413, 0, 0, 0, 1.98413, 0, 0, 0, 1.98413, 0, 0.984127, 0)
+shape = SubResource("BoxShape3D_7j80e")

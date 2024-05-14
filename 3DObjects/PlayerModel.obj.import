@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfcj8laf8c8ey"
+path="res://.godot/imported/PlayerModel.obj-759a722c582f0cfa904ea27ddae8f1fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PlayerModel.obj-759a722c582f0cfa904ea27ddae8f1fd.mesh"]
+
+source_file="res://SinnersandOverlords/3DObjects/PlayerModel.obj"
+dest_files=["res://.godot/imported/PlayerModel.obj-759a722c582f0cfa904ea27ddae8f1fd.mesh", "res://.godot/imported/PlayerModel.obj-759a722c582f0cfa904ea27ddae8f1fd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

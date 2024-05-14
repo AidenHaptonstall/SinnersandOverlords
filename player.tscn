@@ -1,0 +1,434 @@
+[gd_scene load_steps=41 format=3 uid="uid://bc7q30y5u27j1"]
+
+[ext_resource type="Script" path="res://SinnersandOverlords/player.gd" id="1_0bm1a"]
+[ext_resource type="ArrayMesh" uid="uid://cfcj8laf8c8ey" path="res://SinnersandOverlords/3DObjects/PlayerModel.obj" id="2_k44o1"]
+[ext_resource type="Texture2D" uid="uid://db5vkyhur7l7o" path="res://SinnersandOverlords/Resources/ResumeButton.png" id="2_t6qgu"]
+[ext_resource type="Texture2D" uid="uid://dqcdj3a4ivbrf" path="res://SinnersandOverlords/Resources/ConfigButton.png" id="3_gb582"]
+[ext_resource type="Texture2D" uid="uid://k0o01go6aid0" path="res://SinnersandOverlords/Resources/QuitButton.png" id="4_gjl1k"]
+[ext_resource type="Texture2D" uid="uid://r4ua6nm50mn5" path="res://SinnersandOverlords/Resources/under.png" id="5_aigey"]
+[ext_resource type="Texture2D" uid="uid://c55yxj8bg3lrd" path="res://SinnersandOverlords/Resources/GUIFrame.png" id="6_mfg4x"]
+[ext_resource type="Texture2D" uid="uid://b3me8b42jwhoq" path="res://SinnersandOverlords/Resources/HP.png" id="7_ecq3l"]
+[ext_resource type="Texture2D" uid="uid://b37trwgvorwsy" path="res://SinnersandOverlords/Resources/Stamina.png" id="8_4qxiu"]
+[ext_resource type="Script" path="res://SinnersandOverlords/Crosshair.gd" id="9_8vup4"]
+[ext_resource type="Texture2D" uid="uid://dylo6sgx1riu5" path="res://SinnersandOverlords/Resources/RespawnButton.png" id="10_h17fg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ur0d"]
+
+[sub_resource type="Skin" id="Skin_5ubsl"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_ihuuq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b87vu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1ea6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g8soy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m107e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3nggk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1132"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubiid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgs2w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lin"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nov7y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rg4a0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5kaxy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yse7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ran05"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hbuc8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slauu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f22xx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyrie"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iugg2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0q3de"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i22da"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g5ji"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_stxq4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqrjl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52ruc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18cgd"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_0bm1a")
+
+[node name="PlayerHitBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.48, 0, 0, 0, 0.125, 0, 0.034, -0.0116013)
+shape = SubResource("BoxShape3D_1ur0d")
+
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-10, 0, -0.02, 0, 0.02, 0, 0.02, 0, -8.74228e-10, 0, -0.203396, 0)
+mesh = ExtResource("2_k44o1")
+skin = SubResource("Skin_5ubsl")
+skeleton = NodePath("Skeleton3D")
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Player"]
+
+[node name="TwistPivot" type="Node3D" parent="Player"]
+transform = Transform3D(-5.46392e-07, 0, 12.5, 0, 12, 0, -12.5, 0, -5.46392e-07, 1.25729e-06, 10.2378, 1.86264e-07)
+
+[node name="PitchPivot" type="Node3D" parent="Player/TwistPivot"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/TwistPivot/PitchPivot"]
+transform = Transform3D(0.999657, -0.0130885, 0.0226699, 0, 0.866025, 0.5, -0.0261769, -0.499829, 0.865729, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_ihuuq")
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="Player/TwistPivot/PitchPivot/SpringArm3D"]
+transform = Transform3D(3.99863, 0.0181823, -0.103117, -0.0523539, 3.75865, -1.36741, 0.0906796, 1.36829, 3.7576, 0.00834641, -0.0186584, 4.03232)
+
+[node name="GUIControl" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PauseMenu" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -57.0
+offset_right = 307.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+icon = ExtResource("2_t6qgu")
+
+[node name="Config" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -18.0
+offset_right = 307.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+icon = ExtResource("3_gb582")
+
+[node name="Quit" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = 23.0
+offset_right = 307.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+icon = ExtResource("4_gjl1k")
+
+[node name="General" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HP" type="TextureProgressBar" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/General"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 30.0
+scale = Vector2(2.16, 1)
+value = 100.0
+texture_under = ExtResource("5_aigey")
+texture_over = ExtResource("6_mfg4x")
+texture_progress = ExtResource("7_ecq3l")
+
+[node name="Stamina" type="TextureProgressBar" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/General"]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 60.0
+scale = Vector2(2.16, 1)
+step = 0.5
+value = 100.0
+texture_under = ExtResource("5_aigey")
+texture_over = ExtResource("6_mfg4x")
+texture_progress = ExtResource("8_4qxiu")
+
+[node name="Crosshair" type="CenterContainer" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/General"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_8vup4")
+
+[node name="Interact" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/General"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -129.0
+offset_right = 52.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press
+Right Click
+to Pick Up"
+
+[node name="Config" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0666667, 0.0313726, 0, 1)
+
+[node name="Sneak" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 1
+offset_left = 5.0
+offset_right = 131.0
+offset_bottom = 36.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b87vu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w1ea6")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_g8soy")
+text = "Sneak Options:"
+
+[node name="ShiftButton" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 2.0
+offset_right = 259.0
+offset_bottom = 33.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m107e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3nggk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d1132")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ubiid")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cgs2w")
+text = "Hold"
+
+[node name="BackButton" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
+[node name="Sprint" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 131.0
+offset_bottom = 71.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b87vu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w1ea6")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_g8soy")
+text = "Sprint Options:"
+
+[node name="CtrlButton" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 36.0
+offset_right = 259.0
+offset_bottom = 67.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o4lin")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nov7y")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rg4a0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5kaxy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yse7u")
+text = "Hold"
+
+[node name="Jump" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 70.0
+offset_right = 131.0
+offset_bottom = 106.0
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ran05")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hbuc8")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_slauu")
+text = "Jump Options:"
+
+[node name="JumpButton" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 70.0
+offset_right = 259.0
+offset_bottom = 101.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f22xx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uyrie")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iugg2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_0q3de")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i22da")
+text = "Toggle"
+
+[node name="DeathUI" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/DeathUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.364706, 0.0313726, 0, 0.85098)
+
+[node name="Respawn" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/DeathUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -40.0
+offset_right = 306.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+icon = ExtResource("10_h17fg")
+
+[node name="Quit" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/DeathUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = 6.0
+offset_right = 306.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+icon = ExtResource("4_gjl1k")
+
+[node name="Quest" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Title" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Quest"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -65.0
+offset_right = -5.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3g5ji")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_stxq4")
+text = "Quests:"
+
+[node name="Quest1" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Quest"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -414.5
+offset_top = 30.0
+offset_right = -2.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gqrjl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_52ruc")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_18cgd")
+
+[node name="Detection" type="RayCast3D" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -1.75)
+
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu/Config" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/ShiftButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/CtrlButton" to="." method="_on_ctrl_button_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/JumpButton" to="." method="_on_jump_button_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/DeathUI/Respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/DeathUI/Quit" to="." method="_on_quit_pressed"]
