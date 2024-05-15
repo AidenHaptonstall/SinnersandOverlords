@@ -91,12 +91,12 @@ transform = Transform3D(-5.46392e-07, 0, 12.5, 0, 12, 0, -12.5, 0, -5.46392e-07,
 [node name="PitchPivot" type="Node3D" parent="Player/TwistPivot"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Player/TwistPivot/PitchPivot"]
-transform = Transform3D(0.999657, -0.0130885, 0.0226699, 0, 0.866025, 0.5, -0.0261769, -0.499829, 0.865729, 0, 0, 0)
+transform = Transform3D(0.999657, -0.0130885, 0.0226699, -0.00410896, 0.776832, 0.629694, -0.0258524, -0.629572, 0.776513, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_ihuuq")
-spring_length = 4.0
+spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="Player/TwistPivot/PitchPivot/SpringArm3D"]
-transform = Transform3D(3.99863, 0.0181823, -0.103117, -0.0523539, 3.75865, -1.36741, 0.0906796, 1.36829, 3.7576, 0.00834641, -0.0186584, 4.03232)
+transform = Transform3D(3.99871, 0.00897888, -0.101363, -0.0506161, 3.77108, -1.69282, 0.0880822, 1.75942, 3.62884, 0.00814724, 0.0148773, 3.00797)
 
 [node name="GUIControl" type="Control" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D"]
 layout_mode = 3
@@ -287,6 +287,7 @@ grow_vertical = 0
 text = "Back"
 
 [node name="Sprint" type="TextEdit" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+visible = false
 layout_mode = 0
 offset_left = 5.0
 offset_top = 35.0
@@ -298,6 +299,7 @@ theme_override_styles/read_only = SubResource("StyleBoxEmpty_g8soy")
 text = "Sprint Options:"
 
 [node name="CtrlButton" type="Button" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config"]
+visible = false
 layout_mode = 0
 offset_left = 130.0
 offset_top = 36.0
@@ -400,7 +402,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -65.0
 offset_right = -5.0
-offset_bottom = 30.0
+offset_bottom = 36.0
 grow_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3g5ji")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_stxq4")
@@ -411,14 +413,16 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -414.5
+offset_left = -414.0
 offset_top = 30.0
-offset_right = -2.0
-offset_bottom = 70.0
+offset_right = -1.0
+offset_bottom = 235.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gqrjl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_52ruc")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_18cgd")
+wrap_mode = 1
 
 [node name="Detection" type="RayCast3D" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)

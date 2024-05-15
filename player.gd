@@ -94,10 +94,10 @@ func _physics_process(delta):
 		if Detection.get_collider().name == "Bartender" && Input.is_action_just_pressed("LeftClick"):
 			if BartenderInteractions == 0:
 				QuestUI.visible = true
-				QuestOne.text = "Bartender: Get me the burger downhill. [Incomplete]"
+				QuestOne.text = "Bartender: Get me the burger behind the mountain across the bridge. [Incomplete]"
 				BartenderInteractions += 1
 			elif BartenderInteractions >= 1 and hasFood:
-				QuestOne.text = "Bartender: Get me the burger downhill. [Complete]"
+				QuestOne.text = "Bartender: Get me the burger behind the mountain across the bridge. [Complete]"
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -216,7 +216,7 @@ func _void_death():
 func _on_respawn_pressed():
 	HP.value = HP.max_value
 	Stamina.value = Stamina.max_value
-	position.y = 12
+	position.y = 22
 	position.z = 0
 	position.x = 0
 	DeathUI.visible = false

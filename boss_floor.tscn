@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfybnqfj1pay7"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_82bcc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rd4mp"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ff0k1"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="BossFloor" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visibility_parent = NodePath("BossFloor")
+navigation_mesh = SubResource("NavigationMesh_82bcc")
+
+[node name="BossFloor" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("BoxMesh_rd4mp")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/BossFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/BossFloor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ff0k1")

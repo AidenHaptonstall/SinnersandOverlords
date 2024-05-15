@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctyqax0476qop"]
+
+[ext_resource type="Script" path="res://Boss.gd" id="1_xj0vf"]
+[ext_resource type="Texture2D" uid="uid://b3me8b42jwhoq" path="res://SinnersandOverlords/Resources/HP.png" id="2_w4gwd"]
+[ext_resource type="ArrayMesh" uid="uid://cfcj8laf8c8ey" path="res://SinnersandOverlords/3DObjects/PlayerModel.obj" id="3_0a3ct"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft7u0"]
+albedo_texture = ExtResource("2_w4gwd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cw27w"]
+
+[node name="Boss" type="CharacterBody3D"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+script = ExtResource("1_xj0vf")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247058, 0, -0.220092)
+material_override = SubResource("StandardMaterial3D_ft7u0")
+mesh = ExtResource("3_0a3ct")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 22, 0, 0, 0, 6, 0, 11, 0)
+shape = SubResource("BoxShape3D_cw27w")
