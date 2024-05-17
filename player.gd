@@ -14,9 +14,12 @@ var doubleJump = 1
 var inVoid = false
 var hasFood = false
 var BartenderInteractions = 0
+var damagePlayer = 0
+var _bossDamage = 0
 
 # Get Food
 @onready var Food = $"../Food"
+@onready var Boss = $"../BossFloor/Boss"
 
 # Get Pivots
 @onready var TwistPivot = $Player
@@ -43,11 +46,16 @@ var BartenderInteractions = 0
 @onready var ShiftButton = $Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/ShiftButton
 @onready var JumpButton = $Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/Config/JumpButton
 
+# Get Animator
+@onready var Animations = $AnimationPlayer
+@onready var DamageTick = $RayCast3D
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Animations.play("DamageTick")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -80,10 +88,19 @@ func _physics_process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		General.visible = false
 		PauseMenu.visible = true
-		
+		Engine.time_scale = 0
+	
+	# Handle DamageTick Detection
+	if DamageTick.is_colliding():
+		if damagePlayer == 0:
+			if DamageTick.get_collider().name == "Boss":
+				damagePlayer = 1
+		else:
+			HP.value -= 3
+			damagePlayer = 0
+	
 	# Handle Detection
 	if Detection.is_colliding():
-		print("Detection: ", Detection.get_collider().name)
 		if Detection.get_collider().name == "Food":
 			Interact.visible = true
 		else:
@@ -98,6 +115,14 @@ func _physics_process(delta):
 				BartenderInteractions += 1
 			elif BartenderInteractions >= 1 and hasFood:
 				QuestOne.text = "Bartender: Get me the burger behind the mountain across the bridge. [Complete]"
+				BartenderInteractions += 1
+		if Detection.get_collider().name == "Boss" && Input.is_action_just_pressed("LeftClick"):
+			if _bossDamage < 5:
+				_bossDamage += 1
+			else:
+				Boss.visible = false
+			
+			
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -151,7 +176,8 @@ func _physics_process(delta):
 		_void_death()
 		inVoid = true
 	
-	
+	if HP.value <= 0:
+		_death()
 	
 	move_and_slide()
 
@@ -176,6 +202,7 @@ func _on_resume_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	General.visible = true
 	PauseMenu.visible = false
+	Engine.time_scale = 1
 
 
 func _on_config_pressed():
@@ -232,3 +259,9 @@ func _on_jump_button_pressed():
 	else:
 		JumpToggle = false
 		JumpButton.text = "Toggle"
+
+
+func _death():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	General.visible = false
+	DeathUI.visible = true

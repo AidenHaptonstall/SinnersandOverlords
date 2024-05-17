@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctyqax0476qop"]
+[gd_scene load_steps=8 format=3 uid="uid://ctyqax0476qop"]
 
 [ext_resource type="Script" path="res://Boss.gd" id="1_xj0vf"]
 [ext_resource type="Texture2D" uid="uid://b3me8b42jwhoq" path="res://SinnersandOverlords/Resources/HP.png" id="2_w4gwd"]
@@ -9,7 +9,29 @@ albedo_texture = ExtResource("2_w4gwd")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cw27w"]
 
-[node name="Boss" type="CharacterBody3D"]
+[sub_resource type="Animation" id="Animation_v0y3m"]
+resource_name = "AttackRadius"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0), Vector3(0, 3.14159, 0), Vector3(0, 4.71239, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5kiex"]
+_data = {
+"AttackRadius": SubResource("Animation_v0y3m")
+}
+
+[node name="Boss" type="CharacterBody3D" groups=["Enemies_Major"]]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
 script = ExtResource("1_xj0vf")
 
@@ -19,7 +41,18 @@ material_override = SubResource("StandardMaterial3D_ft7u0")
 mesh = ExtResource("3_0a3ct")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.1
+path_max_distance = 3.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 22, 0, 0, 0, 6, 0, 11, 0)
 shape = SubResource("BoxShape3D_cw27w")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-0.0765922, 0, -0.997063, 0, 1, 0, 0.997063, 0, -0.0765922, 0, 7.59545, 0)
+target_position = Vector3(15, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5kiex")
+}

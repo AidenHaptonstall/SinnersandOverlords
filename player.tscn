@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bc7q30y5u27j1"]
+[gd_scene load_steps=43 format=3 uid="uid://bc7q30y5u27j1"]
 
 [ext_resource type="Script" path="res://SinnersandOverlords/player.gd" id="1_0bm1a"]
 [ext_resource type="ArrayMesh" uid="uid://cfcj8laf8c8ey" path="res://SinnersandOverlords/3DObjects/PlayerModel.obj" id="2_k44o1"]
@@ -11,8 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b37trwgvorwsy" path="res://SinnersandOverlords/Resources/Stamina.png" id="8_4qxiu"]
 [ext_resource type="Script" path="res://SinnersandOverlords/Crosshair.gd" id="9_8vup4"]
 [ext_resource type="Texture2D" uid="uid://dylo6sgx1riu5" path="res://SinnersandOverlords/Resources/RespawnButton.png" id="10_h17fg"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1ur0d"]
 
 [sub_resource type="Skin" id="Skin_5ubsl"]
 
@@ -70,20 +68,38 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18cgd"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ur0d"]
+
+[sub_resource type="Animation" id="Animation_rcwqv"]
+resource_name = "DamageTick"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0), Vector3(0, 3.14159, 0), Vector3(0, 4.71239, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nayvk"]
+_data = {
+"DamageTick": SubResource("Animation_rcwqv")
+}
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_0bm1a")
-
-[node name="PlayerHitBox" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.125, 0, 0, 0, 0.48, 0, 0, 0, 0.125, 0, 0.034, -0.0116013)
-shape = SubResource("BoxShape3D_1ur0d")
 
 [node name="Player" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.74228e-10, 0, -0.02, 0, 0.02, 0, 0.02, 0, -8.74228e-10, 0, -0.203396, 0)
 mesh = ExtResource("2_k44o1")
 skin = SubResource("Skin_5ubsl")
-skeleton = NodePath("Skeleton3D")
-
-[node name="Skeleton3D" type="Skeleton3D" parent="Player"]
+skeleton = NodePath("")
 
 [node name="TwistPivot" type="Node3D" parent="Player"]
 transform = Transform3D(-5.46392e-07, 0, 12.5, 0, 12, 0, -12.5, 0, -5.46392e-07, 1.25729e-06, 10.2378, 1.86264e-07)
@@ -427,6 +443,19 @@ wrap_mode = 1
 [node name="Detection" type="RayCast3D" parent="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(0, 0, -1.75)
+
+[node name="PlayerHitBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.48, 0, 0, 0, 0.125, 0, 0.034, -0.0116013)
+shape = SubResource("BoxShape3D_1ur0d")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.777741, 0, 0.628585, 0, 1, 0, -0.628585, 0, 0.777741, 0, 0, 0)
+target_position = Vector3(0.6, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nayvk")
+}
 
 [connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Player/TwistPivot/PitchPivot/SpringArm3D/Camera3D/GUIControl/PauseMenu/Config" to="." method="_on_config_pressed"]
